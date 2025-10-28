@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI-Powered-Fraud-Detection-for-UID-Aadhaar</title>
+    <style>
+        /* ----------------- Gaming Style CSS ----------------- */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #00ffcc;
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            color: #00ffcc;
+            text-shadow: 2px 2px #ff00ff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #00ffcc;
+            border-radius: 5px;
+            background: #1a1a2e;
+            color: #00ffcc;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #ff00ff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00ffcc;
+            color: #1a1a2e;
+            transform: scale(1.05);
+        }
+
+        .result {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 0 20px #ff00ff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #ff00ff; }
+            to { box-shadow: 0 0 20px #00ffcc; }
+        }
+
+        .valid {
+            color: #00ff00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .invalid {
+            color: #ff0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .field {
+            margin: 5px 0;
+        }
+
+        .field span {
+            font-weight: bold;
+            color: #ff00ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .result {
+                width: 95%;
+            }
+
+            header {
+                font-size: 0.9em;
+            }
+
+            button, input[type="file"] {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>AI-Powered-Fraud-Detection-for-UID-Aadhaar</header>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" multiple required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if results %}
+        {% for result in results %}
+            <div class="result">
+                {% if result.error %}
+                    <p class="invalid">⚠️ Error: {{ result.error }}</p>
+                {% else %}
+                    <p class="{% if result.is_valid %}valid{% else %}invalid{% endif %}">
+                        {% if result.is_valid %}✅ Aadhaar Card Valid{% else %}⚠️ Possible Fraud{% endif %}
+                    </p>
+                    <div class="field"><span>Aadhaar Number:</span> {{ result['Aadhaar Number'] or 'Not found' }}</div>
+                    <div class="field"><span>Name:</span> {{ result['3'] or 'Not found' }}</div>
+                    <div class="field"><span>Gender:</span> {{ result['2'] or 'Not found' }}</div>
+                    <div class="field"><span>DOB:</span> {{ result['DOB'] or 'Not found' }}</div>
+                    <!-- <div class="field"><span>OCR Text:</span> {{ result['Full OCR Text'] }}</div> -->
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>
